@@ -118,6 +118,6 @@ Rails.application.routes.draw do
   match '*from', :to => 'articles#redirect', :format => false
 
   # Merge
-  #match '/admin/edit/:id/merge', :to => 'admin#merge'
+  #match '/admin/content/merge/:id', :to => 'admin/content#merge'
 
 end

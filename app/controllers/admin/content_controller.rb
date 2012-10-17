@@ -6,20 +6,6 @@ class Admin::ContentController < Admin::BaseController
 
   cache_sweeper :blog_sweeper
 
-  def merge
-     #check if supplied id actually is valid
-    other_id = params[:merge_with]
-    @article = Article.find(params[:id])  # failed
-    if Article.find(other_id) != []
-      @article.merge_with(other_id)
-      redirect_to :action => 'index'
-      flash[:notice] = _('Article was successfully merged')
-    else
-      redirect_to :action => 'index'
-      flash[:notice] = _('Something went wrong...')
-    end
-  end
-
   def test
     redirect_to :action => 'index'
     flash[:notice] = _('Article was successfully tested')
@@ -45,6 +31,20 @@ class Admin::ContentController < Admin::BaseController
   def new
     @article_type = 'new'
     new_or_edit
+  end
+
+  def merge
+     #check if supplied id actually is valid
+    other_id = params[:merge_with]
+    @article = Article.find(params[:id])  # failed
+    if Article.find(other_id) != nil
+      @article.merge_with(other_id)
+      redirect_to :action => 'index'
+      flash[:notice] = _('Article was successfully merged')
+    else
+      redirect_to :action => 'index'
+      flash[:notice] = _('Something went wrong...')
+    end
   end
 
   def edit

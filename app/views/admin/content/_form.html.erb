@@ -149,25 +149,9 @@
   </div>
   </div>
 
-  <div  <%= "style='display: none;'" if @article_type == 'new' %> >
-    <h4><%= _("This is a test") %></h4>
-    <div class=''>
-      <%= form_tag( :action => "test", :id => @article.id ) do %>
-        <%= text_field_tag 't_with' %>
-        <%= submit_tag 'test' %>
-      <% end %>  
-    </div> 
-  </div>
-
-  <div  <%= "style='display: none;'" if @article_type == 'new' %> >
-    <h4><%= _("Merge Articles") %></h4>
-    <div class=''>
-      <%= form_tag( :action => "merge", :id => @article.id ) do %>
-        <%= text_field_tag 'merge_with' %>
-        <%= submit_tag 'Merge' %>
-      <% end %>  
-    </div> 
-  </div>
+  
 
 </div>
+
+
 
