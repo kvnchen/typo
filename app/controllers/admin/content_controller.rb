@@ -6,6 +6,25 @@ class Admin::ContentController < Admin::BaseController
 
   cache_sweeper :blog_sweeper
 
+  def merge
+     #check if supplied id actually is valid
+    other_id = params[:merge_with]
+    @article = Article.find(params[:id])  # failed
+    if Article.find(other_id) != []
+      @article.merge_with(other_id)
+      redirect_to :action => 'index'
+      flash[:notice] = _('Article was successfully merged')
+    else
+      redirect_to :action => 'index'
+      flash[:notice] = _('Something went wrong...')
+    end
+  end
+
+  def test
+    redirect_to :action => 'index'
+    flash[:notice] = _('Article was successfully tested')
+  end
+
   def auto_complete_for_article_keywords
     @items = Tag.find_with_char params[:article][:keywords].strip
     render :inline => "<%= raw auto_complete_result @items, 'name' %>"
@@ -24,10 +43,12 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def new
+    @article_type = 'new'
     new_or_edit
   end
 
   def edit
+    @article_type = 'edit'
     @article = Article.find(params[:id])
     unless @article.access_by? current_user
       redirect_to :action => 'index'

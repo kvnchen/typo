@@ -41,6 +41,30 @@ Given /^the blog is set up$/ do
                 :profile_id => 1,
                 :name => 'admin',
                 :state => 'active'})
+  
+  User.create!({:login => 'bob',
+                :password => '12345',
+                :email => 'bob@snow.com',
+                :profile_id => 3,
+                :name => 'bob',
+                :state => 'active'})
+
+  Article.create!({:type => "Article",
+                   :title => "Hello World 1",
+                   :author => "bob",
+                   :body => "First post",
+                   :published => true,
+                   :allow_comments => true,
+                   :state => "published"})
+
+  Article.create!({:type => "Article",
+                   :title => "Hello World 2",
+                   :author => "admin",
+                   :body => "Second post",
+                   :published => true,
+                   :allow_comments => true,
+                   :state => "published"})
+
 end
 
 And /^I am logged into the admin panel$/ do
