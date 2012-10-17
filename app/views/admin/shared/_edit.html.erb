@@ -5,7 +5,7 @@
 
 <% end %>
 
-<div  <%= "style='display: none;'" if @article_type == 'new' %> >
+<div  <%= "style='display: none;'" if @article_type == 'new' or current_user.admin? != true %> >
     <h4><%= _("Merge Articles") %></h4>
     <div>
       <%= form_tag( :action => 'merge', :id => @article.id ) do %>
